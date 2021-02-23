@@ -12,7 +12,10 @@ aws ec2 create-key-pair --key-name TESTING_KEY
     "KeyName": "TESTING_KEY",
     "KeyPairId": "key-00ac67aa8b903a1f5"
 }
+
 aws ec2 delete-key-pair --key-name TESTING_KEY
+
+aws ec2 describe-key-pairs
 
 #Instances
 aws ec2 run-instances --image-id ami-00c3c6bea43817945 --count 1 --instance-type t2.micro --key-name "KEYNAME"
