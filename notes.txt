@@ -1,6 +1,12 @@
 #Configuration
 aws configure
 
+#Describe
+aws ec2 describe-instances
+aws ec2 describe-subnets
+aws ec2 describe-vpcs
+aws ec2 describe-key-pairs
+
 #Keys
 aws ec2 create-key-pair --key-name TESTING_KEY --query 'KeyMaterial' --output text > TESTING_KEY.pem
 
@@ -15,7 +21,18 @@ aws ec2 create-key-pair --key-name TESTING_KEY
 
 aws ec2 delete-key-pair --key-name TESTING_KEY
 
-aws ec2 describe-key-pairs
+# VPC
+aws ec2 create-vpc --cidr-block 172.30.0.0/20 --amazon-provided-ipv6-cidr-block
+aws ec2 delete-vpc --vpc-id vpc-036944a713b83250f
+
+# Subnet
+aws ec2 create-subnet --vpc-id vpc-0a8e01427ac64b2c7 --cidr-block 172.30.0.0/24
+aws ec2 delete-subnet --subnet-id subnet-04693a494f46ce915
 
 #Instances
 aws ec2 run-instances --image-id ami-00c3c6bea43817945 --count 1 --instance-type t2.micro --key-name "KEYNAME"
+aws ec2 run-instances --image-id ami-00c3c6bea43817945 --count 1 --instance-type t2.micro --key-name "KEYNAME" --subnet-id subnet-04693a494f46ce915
+aws ec2 terminate-instances --instance-ids i-0b6854f28c67bf97f
+
+#Tags
+aws ec2 create-tags --resources i-0b6854f28c67bf97f --tags Key=Name,Value=TestingVM
