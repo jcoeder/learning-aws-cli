@@ -1,0 +1,18 @@
+#Configuration
+aws configure
+
+#Keys
+aws ec2 create-key-pair --key-name TESTING_KEY --query 'KeyMaterial' --output text > TESTING_KEY.pem
+
+# KeyMaterial is a key in a dictionary
+aws ec2 create-key-pair --key-name TESTING_KEY
+{
+    "KeyFingerprint": "99:eb:0f:db:5d:71:bc:08:9a:05:8b:bd:41:70:d3:79:85:f4:0e:06",
+    "KeyMaterial": "-----BEGIN RSA PRIVATE KEY-----\XXXXXXXXXXXXXXX\n-----END RSA PRIVATE KEY-----",
+    "KeyName": "TESTING_KEY",
+    "KeyPairId": "key-00ac67aa8b903a1f5"
+}
+aws ec2 delete-key-pair --key-name TESTING_KEY
+
+#Instances
+aws ec2 run-instances --image-id ami-00c3c6bea43817945 --count 1 --instance-type t2.micro --key-name "KEYNAME"
