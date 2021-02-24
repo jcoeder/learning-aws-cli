@@ -36,3 +36,14 @@ aws ec2 terminate-instances --instance-ids i-0b6854f28c67bf97f
 
 #Tags
 aws ec2 create-tags --resources i-0b6854f28c67bf97f --tags Key=Name,Value=TestingVM
+
+#S3
+aws s3 mb s3://pizza-wingszz #Make Bucket
+sws s3 ls s3://pizza-wingszz #List
+aws s3 cp serials.text s3://pizza-wingszz #Copy
+aws s3 mv serials.text s3://pizza-wingszz #Move
+aws s3 ls s3://pizza-wingszz #List
+aws s3 rm s3://pizza-wingszz/serials.text #Remove
+aws s3 sync Downloads s3://pizza-wingszzz #Sync Folder
+aws s3 sync Downloads s3://pizza-wingszzz --delete #Sync Folder, delete files that do not exist at source
+aws s3 rb s3://pizza-wingszzz --force #Remove Bucket
